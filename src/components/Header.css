@@ -1,0 +1,15 @@
+.header-bg{
+    background-color:green;
+}
+.header-bg .nav-link{
+    color:rgb(57, 185, 224);
+}
+.header-bg .nav-link:hover{
+    color:rgb(237, 201, 71);
+}
+.header-bg .navbar-brand{
+    color:rgb(74, 216, 105);
+}
+.header-bg .navbar-brand:hover{
+    color:rgb(163, 34, 113);
+}
