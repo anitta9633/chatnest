@@ -1,0 +1,7 @@
+.cart .input-group>.form-control{
+    width :20%;
+    flex:auto;
+}
+.w-12{
+    width: 12%;
+}

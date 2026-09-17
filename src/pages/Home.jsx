@@ -1,8 +1,10 @@
 import { Container, Row } from "react-bootstrap"
 import LipstickCard from "../components/LipstickCard";
 import HomeCarousel from "../components/HomeCarousel";
+import { useSelector } from "react-redux";
 
-const Home = ({lipsticks,handleIncrement})=>{ //{a:[{},{}]}
+const Home = ({handleIncrement})=>{ //{a:[{},{}]}
+  const {lipsticks} = useSelector((state)=>state.lipstickState);
   console.log("lipsticks------>",lipsticks);
     return(
       <>

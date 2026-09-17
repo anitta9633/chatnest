@@ -1,7 +1,7 @@
 import { Col, Container, Form, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { userRoleChange } from "../redux/userSlice";
+import { userRoleChange, userStatusChange } from "../redux/userSlice";
 
 const ListUsers = () => {
 
@@ -20,6 +20,11 @@ const ListUsers = () => {
 
         toast.success("User role updated");
     };
+    const handleUserStatusChange = (userId) => {
+        console.log("userId------->",userId)
+        dispatch(userStatusChange(userId));
+        toast.success("user status updated");
+    }
 
     return (
         <Container className="mt-4">
@@ -65,7 +70,13 @@ const ListUsers = () => {
                                         </td>
 
                                         <td>
-                                            {user.status || "Active"}
+                                            <Form.Check // prettier-ignore
+                                            type="switch"
+                                            defaultChecked={user.status}
+                                           
+                                            label={user.status ? "Active" : "Inactive"}
+                                            onChange={()=>handleUserStatusChange(user.id)}
+                                        />
                                         </td>
 
                                         <td>

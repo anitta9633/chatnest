@@ -68,6 +68,58 @@ const userSlice = createSlice({
                 );
             }
         },
+         userStatusChange: (state, action) => {
+            const userIndex = state.users.findIndex(
+                (u) => u.id === action.payload
+            );
+
+            console.log("userIndex -------->", userIndex);
+
+            
+            if (userIndex !== -1) {
+                state.users[userIndex].status = !state.users[userIndex].status;
+
+                localStorage.setItem(
+                    "users",
+                    JSON.stringify(state.users)
+                );
+            }
+
+    
+            if (action.payload === state.user?.id ) {
+                state.user.status = !state.user.status;
+
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(state.user)
+                );
+            }
+        },
+          userLogout: (state, action) => {
+            state.user = null;
+            state.isAuthenticated = false;
+            localStorage.removeItem("user");
+            localStorage.removeItem("isAuthenticated");
+           
+            
+        },
+          userProfileUpdate: (state, action) => {
+            console.log("action.payload------>",action.payload)
+            const userIndex = state.users.findIndex((u)=> u.id ===action.payload.id);
+            
+            if(userIndex !==-1){
+                state.users[userIndex] = {...state.users[userIndex],...action.payload}
+                state.user ={...state.user,...action.payload};
+                localStorage.setItem("user",JSON.stringify(state.user));
+                 localStorage.setItem("users",JSON.stringify(state.users));
+            }
+
+
+
+            
+           
+            
+        },
     },
 });
 
@@ -75,6 +127,8 @@ export const {
     userRegister,
     userLogin,
     userRoleChange,
+     userStatusChange,
+    userLogout, userProfileUpdate
 } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -12,7 +12,12 @@ import Register from "./pages/Register";
 import AddLipstick from "./Admin/pages/AddLipstick";
 import ListLipsticks from "./Admin/ListLipstick";
 import EditLipstick from "./Admin/EditLipstick";
+import AdminDashboard from "./Admin/AdminDashboard";
 import ListUsers from "./Admin/ListUsers";
+import Unauthorized from "./pages/Unauthorized";
+import Auth from "./components/Auth";
+import Cart from "./pages/Cart";
+import Profile from "./pages/Profile";
 
 function App() {
   let [cartCount,setcartCount] = useState(0);
@@ -73,10 +78,21 @@ function App() {
       <Route path='/product/:id' element={<LipstickDetails lipsticks ={lipsticks} />}/>
       <Route path='/login' element={<Login />}/>
       <Route path='/register' element={<Register />}/>
-      <Route path='/admin/add-lipstick' element={<AddLipstick />}/>
-      <Route path='/admin/list-lipstick' element={<ListLipsticks/>}/>
-      <Route path='/admin/edit-lipstick/:id' element={<EditLipstick />} />
-       <Route path='/admin/list-users' element={<ListUsers />} />
+      <Route path='/cart' element={<Cart />}/>
+      <Route path='/profile' element={<Auth>
+        <Profile />
+      </Auth>}/>
+
+      <Route path='/un-authorized' element={<Auth>
+        <Unauthorized/>
+      </Auth>}/>
+      <Route path='/admin/add-lipstick' element={<Auth><AddLipstick /></Auth>}/>
+      <Route path='/admin/list-lipstick' element={<Auth><ListLipsticks/></Auth>}/>
+      <Route path='/admin/edit-lipstick/:id' element={<Auth><EditLipstick /></Auth>} />
+       <Route path='/admin/list-users' element={<Auth><ListUsers /></Auth>} />
+       <Route path='/admin/dasboard' element={<Auth requiredRole={["admin"]}>
+        <AdminDashboard />
+      </Auth>} />
     </Routes>
    <Footer />
     </Router>

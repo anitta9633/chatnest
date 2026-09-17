@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { Button, Card, Col } from "react-bootstrap"
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart } from "../redux/lipstickSlice";
 
-const LipstickCard = ({handleIncrement,lipstick}) => {
+const LipstickCard = ({ handleIncrement, lipstick}) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(lipstick));
+    toast.success("Note added to cart");
+  };
     
     // console.log("cartCount----->,cartCount");
     console.log("lipstick------>",lipstick);
@@ -18,7 +26,7 @@ const LipstickCard = ({handleIncrement,lipstick}) => {
                     <Card.Text>
                         {lipstick.lipstickDescription}
                     </Card.Text>
-                    <Button variant="primary" onClick={handleIncrement}>add to cart</Button>
+                    <Button variant="primary" onClick={()=>handleAddToCart(lipstick)}>add to cart</Button>
                 </Card.Body>
 
             </Card>
